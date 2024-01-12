@@ -89,6 +89,9 @@ Add the following line after the `amountIn` decrement:
 
 Consider this change together with the other recommendations in this report.
 
+### **Resolution**
+Not yet resolved.
+
 # [M-01] - `ProphetMaxBuy` function is not gas efficient and might not be able to find exact value if the passed `msg.value` is too high
 
 ### **Context**
@@ -107,6 +110,9 @@ At the final iteration the `amountIn` will be 500 * 0.9^10 = 174.33 tokens which
 
 The logic for finding the maximum `amountIn` shouldn't be part of the `ProphetRouterV1.sol` contract at all, and such a search should be performed off-chain.
 A more efficient way of finding the `amountIn` value should be performed by binary search, which will arrive at a much more precise value. 
+
+### **Resolution**
+Not yet resolved.
 
 # [M-02] - `ProphetSmartSell` function doesn't yield the exact output amount as you would expect
 
@@ -142,6 +148,9 @@ As a consequence the user will always get less than the amountOut he specified i
 It's hard to recommend a specific fix for this function as it is not clear what the intention of the function is.
 If the intention is to receieve the exact amount of ETH, the function fails to do so and should be removed. 
 
+### **Resolution**
+Not yet resolved.
+
 # [M-03] - `swapTokensSupportingFeeOnTransferTokensForExactETH` can leave output tokens hanging in the ProphetRouterV1 contract
 
 ### **Context**
@@ -170,6 +179,8 @@ require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
 Also transfer all the ETH generated from fees to the `owner` not leaving it hanging in the contract.
 `ProphetRouterV1.sol` should not be holding any tokens.
 
+### **Resolution**
+Not yet resolved.
 
 # [L-01] - Improvements to fee mechanism in `swapTokensSupportingFeeOnTransferTokensForExactETH`
 
@@ -185,6 +196,9 @@ As the output amount is not known beforehand it can occur that the fee amount is
 ### **Recommendation**
 
 Consider subtracting fee only if it is lower than the amount of WETH out, or passing it as a percentage of the amount of WETH out.
+
+### **Resolution**
+Not yet resolved.
 
 # Informational findings
 
@@ -235,4 +249,7 @@ require(path[path.length - 1] == WETH, 'PropherRouter: INVALID_PATH');
 
 # [I-06] - Redundant break in `ProphetMaxBuy` function
 If try `this.ProphetBuy...` block is successful `isSwapComplete`is set to true and the while loop is exited.
-[`break;`](https://github.com/leeftk/prophetrouter/blob/4c91c1469eb6c64280ae6ceb79bb5221b92fbccb/contracts/ProphetRouterV1.sol#L212) is therefor redundant. 
+[`break;`](https://github.com/leeftk/prophetrouter/blob/4c91c1469eb6c64280ae6ceb79bb5221b92fbccb/contracts/ProphetRouterV1.sol#L212) is therefor redundant.
+
+## Resolution
+Not yet resolved.
