@@ -90,7 +90,7 @@ Add the following line after the `amountIn` decrement:
 Consider this change together with the other recommendations in this report.
 
 ### **Resolution**
-Not yet resolved.
+Fixed.
 
 # [M-01] - `ProphetMaxBuy` function is not gas efficient and might not be able to find exact value if the passed `msg.value` is too high
 
@@ -112,7 +112,7 @@ The logic for finding the maximum `amountIn` shouldn't be part of the `ProphetRo
 A more efficient way of finding the `amountIn` value should be performed by binary search, which will arrive at a much more precise value. 
 
 ### **Resolution**
-Not yet resolved.
+This is intended to operate this way, the team is aware of the gas inefficiencies and we have implemented some methods to avoid having users pay high gas fees such as storing the `maxBuyAmount` for each token address.
 
 # [M-02] - `ProphetSmartSell` function doesn't yield the exact output amount as you would expect
 
@@ -149,7 +149,7 @@ It's hard to recommend a specific fix for this function as it is not clear what 
 If the intention is to receieve the exact amount of ETH, the function fails to do so and should be removed. 
 
 ### **Resolution**
-Not yet resolved.
+This function works as intended as per the tech specs. Acknowledged.
 
 # [M-03] - `swapTokensSupportingFeeOnTransferTokensForExactETH` can leave output tokens hanging in the ProphetRouterV1 contract
 
@@ -180,7 +180,7 @@ Also transfer all the ETH generated from fees to the `owner` not leaving it hang
 `ProphetRouterV1.sol` should not be holding any tokens.
 
 ### **Resolution**
-Not yet resolved.
+Fixed.
 
 # [L-01] - Improvements to fee mechanism in `swapTokensSupportingFeeOnTransferTokensForExactETH`
 
@@ -198,7 +198,7 @@ As the output amount is not known beforehand it can occur that the fee amount is
 Consider subtracting fee only if it is lower than the amount of WETH out, or passing it as a percentage of the amount of WETH out.
 
 ### **Resolution**
-Not yet resolved.
+Acknowledged. 
 
 # Informational findings
 
@@ -252,4 +252,4 @@ If try `this.ProphetBuy...` block is successful `isSwapComplete`is set to true a
 [`break;`](https://github.com/leeftk/prophetrouter/blob/4c91c1469eb6c64280ae6ceb79bb5221b92fbccb/contracts/ProphetRouterV1.sol#L212) is therefor redundant.
 
 ## Resolution
-Not yet resolved.
+Fixed.
